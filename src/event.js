@@ -3,23 +3,12 @@
 //     Zepto.js may be freely distributed under the MIT license.
 
 (function($){
-  var $$ = $.qsa, handlers = {}, _zid = 1, specialEvents={};
+  var _zid = 1, specialEvents={};
 
   specialEvents.click = specialEvents.mousedown = specialEvents.mouseup = specialEvents.mousemove = 'MouseEvents';
 
   function zid(element) {
     return element._zid || (element._zid = _zid++);
-  }
-  function findHandlers(element, event, fn, selector) {
-    event = parse(event);
-    if (event.ns) var matcher = matcherFor(event.ns);
-    return (handlers[zid(element)] || []).filter(function(handler) {
-      return handler
-        && (!event.e  || handler.e == event.e)
-        && (!event.ns || matcher.test(handler.ns))
-        && (!fn       || handler.fn == fn)
-        && (!selector || handler.sel == selector);
-    });
   }
   function parse(event) {
     var parts = ('' + event).split('.');
@@ -32,6 +21,20 @@
   function eachEvent(events, fn, iterator){
     if ($.isObject(events)) $.each(events, iterator);
     else events.split(/\s/).forEach(function(type){ iterator(type, fn) });
+  }
+
+$.initInstance(function($) {
+  var handlers = {};
+  function findHandlers(element, event, fn, selector) {
+    event = parse(event);
+    if (event.ns) var matcher = matcherFor(event.ns);
+    return (handlers[zid(element)] || []).filter(function(handler) {
+      return handler
+        && (!event.e  || handler.e == event.e)
+        && (!event.ns || matcher.test(handler.ns))
+        && (!fn       || handler.fn == fn)
+        && (!selector || handler.sel == selector);
+    });
   }
 
   function add(element, events, fn, selector, getDelegate){
@@ -59,24 +62,28 @@
     });
   }
 
-  $.event = { add: add, remove: remove }
+  $.event = { add: add, remove: remove, findHandlers: findHandlers }
+});
 
   $.fn.bind = function(event, callback){
+    var $ = this.$;
     return this.each(function(){
-      add(this, event, callback);
+      $.event.add(this, event, callback);
     });
   };
   $.fn.unbind = function(event, callback){
+    var $ = this.$;
     return this.each(function(){
-      remove(this, event, callback);
+      $.event.remove(this, event, callback);
     });
   };
   $.fn.one = function(event, callback){
+    var $ = this.$;
     return this.each(function(i, element){
-      add(this, event, callback, null, function(fn, type){
+      $.event.add(this, event, callback, null, function(fn, type){
         return function(){
           var result = fn.apply(element, arguments);
-          remove(element, type, fn);
+          $.event.remove(element, type, fn);
           return result;
         }
       });
@@ -115,8 +122,9 @@
   }
 
   $.fn.delegate = function(selector, event, callback){
+    var $ = this.$;
     return this.each(function(i, element){
-      add(element, event, callback, selector, function(fn){
+      $.event.add(element, event, callback, selector, function(fn){
         return function(e){
           var evt, match = $(e.target).closest(selector, element).get(0);
           if (match) {
@@ -128,17 +136,20 @@
     });
   };
   $.fn.undelegate = function(selector, event, callback){
+    var $ = this.$;
     return this.each(function(){
-      remove(this, event, callback, selector);
+      $.event.remove(this, event, callback, selector);
     });
   }
 
   $.fn.live = function(event, callback){
-    $(document.body).delegate(this.selector, event, callback);
+    var $ = this.$;
+    $($.document.body).delegate(this.selector, event, callback);
     return this;
   };
   $.fn.die = function(event, callback){
-    $(document.body).undelegate(this.selector, event, callback);
+    var $ = this.$;
+    $($.document.body).undelegate(this.selector, event, callback);
     return this;
   };
 
@@ -152,6 +163,7 @@
   };
 
   $.fn.trigger = function(event, data){
+    var $ = this.$;
     if (typeof event == 'string') event = $.Event(event);
     fix(event);
     event.data = data;
@@ -161,11 +173,12 @@
   // triggers event handlers on current element just as if an event occurred,
   // doesn't trigger an actual event, doesn't bubble
   $.fn.triggerHandler = function(event, data){
+    var $ = this.$;
     var e, result;
     this.each(function(i, element){
       e = createProxy(typeof event == 'string' ? $.Event(event) : event);
       e.data = data; e.target = element;
-      $.each(findHandlers(element, event.type || event), function(i, handler){
+      $.each($.event.findHandlers(element, event.type || event), function(i, handler){
         result = handler.proxy(e);
         if (e.isImmediatePropagationStopped()) return false;
       });
@@ -188,11 +201,13 @@
     };
   });
 
+$.initInstance(function($) {
   $.Event = function(type, props) {
-    var event = document.createEvent(specialEvents[type] || 'Events'), bubbles = true;
+    var event = $.document.createEvent(specialEvents[type] || 'Events'), bubbles = true;
     if (props) for (var name in props) (name == 'bubbles') ? (bubbles = !!props[name]) : (event[name] = props[name]);
     event.initEvent(type, bubbles, true, null, null, null, null, null, null, null, null, null, null, null, null);
     return event;
   };
+});
 
 })(Zepto);

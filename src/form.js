@@ -26,6 +26,7 @@
   //     ]
   //
   $.fn.serializeArray = function () {
+    var $ = this.$;
     var result = [], el;
     $( Array.prototype.slice.call(this.get(0).elements) ).each(function () {
       el = $(this);

@@ -4,7 +4,7 @@
 
 // The following code is heavily inspired by jQuery's $.fn.data()
 
-(function($) {
+Zepto.initInstance(function($) {
   var data = {}, dataAttr = $.fn.data,
     uuid = $.uuid = +new Date(),
     exp  = $.expando = 'Zepto' + uuid;
@@ -30,4 +30,4 @@
                 value.call(this, idx, getData(this, name)) : value);
       });
   };
-})(Zepto);
+});
