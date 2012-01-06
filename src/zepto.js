@@ -143,7 +143,7 @@ function Zepto(window) {
     return selector === undefined ? $(nodes) : $(nodes).filter(selector);
   }
 
-  $.fragement = fragment;
+  $.fragment = fragment;
 
   $.isFunction = isF;
   $.isObject = isO;
