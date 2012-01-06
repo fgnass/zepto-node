@@ -1,0 +1,13 @@
+{
+  "name": "zepto-jsdom",
+  "version": "0.1.0",
+  "author": "Felix Gnass <fgnass@gmail.com>",
+  "description": "Zepto.js optimized for jsdom",
+  "homepage": "https://github.com/fgnass/zepto-jsdom",
+  "main": "./index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fgnass/zepto-jsdom.git"
+  },
+  "license": "MIT"
+}
