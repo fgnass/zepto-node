@@ -44,6 +44,10 @@ var Zepto = (function() {
     return target;
   }
 
+  function $inArray(elem, array, i) {
+    return emptyArray.indexOf.call(array, elem, i);
+  }
+
   function $map(elements, callback) {
     var value, values = [], i, key;
     if (likeArray(elements))
@@ -150,6 +154,7 @@ function Zepto(window) {
   $.isArray = isA;
 
   $.extend = $extend;
+  $.inArray = $inArray;
   $.map = $map;
   $.each = $each;
 
