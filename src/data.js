@@ -4,6 +4,7 @@
 
 // The following code is heavily inspired by jQuery's $.fn.data()
 
+module.exports = function(Zepto) {
 Zepto.initInstance(function($) {
   var data = {}, dataAttr = $.fn.data,
     uuid = $.uuid = +new Date(),
@@ -31,3 +32,4 @@ Zepto.initInstance(function($) {
       });
   };
 });
+};

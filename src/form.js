@@ -2,7 +2,7 @@
 //     (c) 2010, 2011 Thomas Fuchs
 //     Zepto.js may be freely distributed under the MIT license.
 
-(function ($) {
+module.exports = function($) {
 
   // ### $.fn.serializeArray
   //
@@ -93,4 +93,4 @@
     return this;
   }
 
-})(Zepto);
+};

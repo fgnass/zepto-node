@@ -2,7 +2,7 @@
 //     (c) 2010, 2011 Thomas Fuchs
 //     Zepto.js may be freely distributed under the MIT license.
 
-(function($){
+module.exports = function($){
   var _zid = 1, specialEvents={};
 
   specialEvents.click = specialEvents.mousedown = specialEvents.mouseup = specialEvents.mousemove = 'MouseEvents';
@@ -210,4 +210,4 @@ $.initInstance(function($) {
   };
 });
 
-})(Zepto);
+};
