@@ -83,7 +83,7 @@ var Zepto = (function() {
   /* Array of functions called for each Zepto instance */
   var initializers = [];
 
-function Zepto(window) {
+function Zepto(window, parent) {
 
   var document = window.document,
     table = document.createElement('table'),
@@ -158,7 +158,12 @@ function Zepto(window) {
   $.map = $map;
   $.each = $each;
 
-  Z.prototype = $.fn = Object.create(Zepto.fn);
+  Z.prototype = $.fn = Object.create(parent && parent.fn || Zepto.fn);
+  if (parent) $extend($, parent);
+
+  $.sub = function() {
+    return Zepto(window, $);
+  };
 
   window.Zepto = $;
   '$' in window || (window.$ = $);
