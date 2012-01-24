@@ -945,6 +945,7 @@ ConsoleTestResult.displayName = 'ConsoleTestResult';
   function addError(testcase, error) {
     _super.addError.call(this, testcase, error);
     this.logger.error(testcase + ' threw an error. ' + error);
+    console.log(error.stack);
   }
 
   function startTest(testcase) {
