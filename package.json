@@ -1,13 +1,16 @@
 {
-  "name": "zepto-jsdom",
+  "name": "zepto-node",
   "version": "0.1.0",
   "author": "Felix Gnass <fgnass@gmail.com>",
-  "description": "Zepto.js optimized for jsdom",
-  "homepage": "https://github.com/fgnass/zepto-jsdom",
+  "description": "Zepto.js optimized for server-side DOM implementations",
+  "homepage": "https://github.com/fgnass/zepto-node",
   "main": "./index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fgnass/zepto-jsdom.git"
+    "url": "https://github.com/fgnass/zepto-node.git"
+  },
+  "devDependencies": {
+    "domino": "0.0.1"
   },
   "license": "MIT"
 }
