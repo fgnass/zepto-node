@@ -9,8 +9,12 @@
     "type": "git",
     "url": "https://github.com/fgnass/zepto-node.git"
   },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
   "devDependencies": {
-    "domino": "0.0.1"
+    "domino": "0.0.1",
+    "mocha": "0.10.x"
   },
   "license": "MIT"
 }
