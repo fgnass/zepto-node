@@ -1,6 +1,6 @@
 {
   "name": "zepto-node",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Felix Gnass <fgnass@gmail.com>",
   "description": "Zepto.js optimized for server-side DOM implementations",
   "homepage": "https://github.com/fgnass/zepto-node",
