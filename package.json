@@ -13,7 +13,7 @@
     "test": "./node_modules/.bin/mocha"
   },
   "devDependencies": {
-    "domino": "0.0.1",
+    "domino": "1.0.x",
     "mocha": "0.10.x"
   },
   "license": "MIT"
