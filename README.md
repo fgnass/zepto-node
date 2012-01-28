@@ -26,6 +26,8 @@ $('body').append('<h1>Hello World</h1>');
 
 The original Evidence tests have been ported to Mocha and can be run via `npm test`.
 
+[![Build Status](https://secure.travis-ci.org/fgnass/zepto-node.png)](http://travis-ci.org/fgnass/zepto-node)
+
 # License
 
 This code is based on Zepto.js, Copyright (c) 2010, 2011 Thomas Fuchs
