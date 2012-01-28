@@ -12,13 +12,19 @@ In order to improve the performance characteristics the code as been refactored 
 
 # Usage
 
-    var domino = require('domino');
-    var Zepto = require('zepto-node');
+```javascript
+var domino = require('domino');
+var Zepto = require('zepto-node');
 
-    var window = domino.createWindow();
+var window = domino.createWindow();
 
-    var $ = Zepto(window);
-    $('body').append('<h1>Hello World</h1>');
+var $ = Zepto(window);
+$('body').append('<h1>Hello World</h1>');
+```
+
+# Tests
+
+The original Evidence tests have been ported to Mocha and can be run via `npm test`.
 
 # License
 
